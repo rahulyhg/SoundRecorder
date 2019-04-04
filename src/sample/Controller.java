@@ -9,6 +9,7 @@ import java.io.File;
 
 public class Controller {
 
+    /*############### REFECENCES FOR GUI ###############*/
     public Button ButtonStart;
     public Button ButtonStop;
     public Button ButtonPlay;
@@ -17,11 +18,13 @@ public class Controller {
     public Button ButtonConfirmTop;
     public Button ButtonConfirm;
 
+    /*############### REFECENCES FOR RECORD AND PLAY ###############*/
     private AudioFormat audioFormat;
     private TargetDataLine targetDataLine;
     private String filenamePlay;
     private String filenameRecord;
 
+    /*############### GUI METHODS ###############*/
     public void onActionButtonStart(ActionEvent actionEvent) {
         captureAudio();
     }
@@ -35,7 +38,6 @@ public class Controller {
         playRecord();
     }
 
-
     public void onActionButtonConfirmTop(ActionEvent actionEvent) {
         filenameRecord = LabelFileSave.getText();
     }
@@ -44,29 +46,7 @@ public class Controller {
         filenamePlay = LabelFileRead.getText();
     }
 
-    void captureAudio() {
-        try {
-            audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
-            DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
-            targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
-            new CaptureThread().start();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-    }
-
-    void playRecord() {
-        try {
-            Clip clip = AudioSystem.getClip();
-            File sound = new File(filenamePlay);
-            clip.open(AudioSystem.getAudioInputStream(sound));
-            clip.start();
-            Thread.sleep(clip.getMicrosecondLength() / 1000);
-        } catch (Exception exc) {
-            exc.printStackTrace();
-        }
-    }
+    /* ############### RECORD AND PLAY METHODS AND ALSO INNER CLASS ###############*/
 
     class CaptureThread extends Thread {
         public void run() {
@@ -80,6 +60,30 @@ public class Controller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void captureAudio() {
+        try {
+            audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
+            DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
+            targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
+            new CaptureThread().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    private void playRecord() {
+        try {
+            Clip clip = AudioSystem.getClip();
+            File sound = new File(filenamePlay);
+            clip.open(AudioSystem.getAudioInputStream(sound));
+            clip.start();
+            Thread.sleep(clip.getMicrosecondLength() / 1000);
+        } catch (Exception exc) {
+            exc.printStackTrace();
         }
     }
 }

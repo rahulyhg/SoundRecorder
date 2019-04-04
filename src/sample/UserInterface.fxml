@@ -21,7 +21,7 @@
                 onAction="#onActionButtonConfirmTop" text="Potwierdź"/>
         <Button fx:id="ButtonConfirm" layoutX="304.0" layoutY="318.0" mnemonicParsing="false"
                 onAction="#onActionButtonConfirmBottom" text="Potwierdź"/>
-        <Button fx:id="ButtonPlay1" layoutX="465.0" layoutY="298.0" mnemonicParsing="false"
+        <Button fx:id="ButtonPlay" layoutX="465.0" layoutY="298.0" mnemonicParsing="false"
                 onAction="#onActionButtonPlay" prefHeight="65.0" prefWidth="106.0" text="Odtwórz"/>
     </children>
 </Pane>
