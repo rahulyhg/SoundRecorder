@@ -11,11 +11,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("UserInterface.fxml"));
+        Scene scene=new Scene(root);
         primaryStage.setTitle("Sound Recorder");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(400);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

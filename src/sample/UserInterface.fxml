@@ -5,16 +5,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Button fx:id="ButtonStart" layoutX="465.0" layoutY="33.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="106.0" text="Start" />
-      <Button layoutX="465.0" layoutY="117.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="106.0" text="Stop" />
-      <Button layoutX="465.0" layoutY="298.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="106.0" text="Odtwórz" />
-      <Label layoutX="120.0" layoutY="25.0" text="Podaj nazwę pliku do zapisu" />
-      <TextField layoutX="91.0" layoutY="53.0" prefHeight="25.0" prefWidth="208.0" />
-      <Label layoutX="116.0" layoutY="290.0" text="Podaj nazwę pliku do odczytu" />
-      <TextField layoutX="91.0" layoutY="318.0" prefHeight="25.0" prefWidth="208.0" />
-      <Button layoutX="304.0" layoutY="53.0" mnemonicParsing="false" text="Potwierdź" />
-      <Button layoutX="304.0" layoutY="318.0" mnemonicParsing="false" text="Potwierdź" />
-   </children>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.Controller">
+    <children>
+        <Button fx:id="ButtonStart" layoutX="465.0" layoutY="33.0" mnemonicParsing="false"
+                onAction="#onActionButtonStart" prefHeight="65.0" prefWidth="106.0" text="Start"/>
+        <Button fx:id="ButtonStop" layoutX="465.0" layoutY="117.0" mnemonicParsing="false"
+                onAction="#onActionButtonStop" prefHeight="65.0" prefWidth="106.0" text="Stop"/>
+        <Label layoutX="120.0" layoutY="25.0" text="Podaj nazwę pliku do zapisu"/>
+        <TextField fx:id="LabelFileSave" layoutX="91.0" layoutY="53.0" prefHeight="25.0" prefWidth="208.0"/>
+        <Label layoutX="116.0" layoutY="290.0" text="Podaj nazwę pliku do odczytu"/>
+        <TextField fx:id="LabelFileRead" layoutX="91.0" layoutY="318.0" prefHeight="25.0" prefWidth="208.0"/>
+        <Button fx:id="ButtonConfirmTop" layoutX="304.0" layoutY="53.0" mnemonicParsing="false"
+                onAction="#onActionButtonConfirmTop" text="Potwierdź"/>
+        <Button fx:id="ButtonConfirm" layoutX="304.0" layoutY="318.0" mnemonicParsing="false"
+                onAction="#onActionButtonConfirmBottom" text="Potwierdź"/>
+        <Button fx:id="ButtonPlay1" layoutX="465.0" layoutY="298.0" mnemonicParsing="false"
+                onAction="#onActionButtonPlay" prefHeight="65.0" prefWidth="106.0" text="Odtwórz"/>
+    </children>
 </Pane>
