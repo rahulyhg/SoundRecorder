@@ -1,11 +1,13 @@
 package sample;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javax.sound.sampled.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Controller {
 
@@ -46,6 +48,14 @@ public class Controller {
         filenamePlay = LabelFileRead.getText();
     }
 
+    private void popOutBox(String title, String info, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(info);
+        alert.showAndWait();
+    }
+
     /* ############### RECORD AND PLAY METHODS AND ALSO INNER CLASS ###############*/
 
     class CaptureThread extends Thread {
@@ -69,8 +79,10 @@ public class Controller {
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
             new CaptureThread().start();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NullPointerException e) {
+            popOutBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
+        } catch (IllegalArgumentException | LineUnavailableException e) {
+            popOutBox("Error", "Brak mikrofonu lub niezgodność ze standardem", Alert.AlertType.ERROR);
             System.exit(0);
         }
     }
@@ -83,7 +95,7 @@ public class Controller {
             clip.start();
             Thread.sleep(clip.getMicrosecondLength() / 1000);
         } catch (Exception exc) {
-            exc.printStackTrace();
+            popOutBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
         }
     }
 }
