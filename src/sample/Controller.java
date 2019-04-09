@@ -25,6 +25,7 @@ public class Controller {
     private TargetDataLine targetDataLine;
     private String filenamePlay;
     private String filenameRecord;
+    private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*############### GUI METHODS ###############*/
     public void onActionButtonStart(ActionEvent actionEvent) {
@@ -46,14 +47,6 @@ public class Controller {
 
     public void onActionButtonConfirmBottom(ActionEvent actionEvent) {
         filenamePlay = LabelFileRead.getText();
-    }
-
-    private void popOutBox(String title, String info, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(info);
-        alert.showAndWait();
     }
 
     /* ############### RECORD AND PLAY METHODS AND ALSO INNER CLASS ###############*/
@@ -78,11 +71,12 @@ public class Controller {
             audioFormat = new AudioFormat(8000.0F, 16, 1, true, false);
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
-            new CaptureThread().start();
+            CaptureThread captureThread = new CaptureThread();
+            captureThread.start();
         } catch (NullPointerException e) {
-            popOutBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
+            popOutWindow.messageBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
         } catch (IllegalArgumentException | LineUnavailableException e) {
-            popOutBox("Error", "Brak mikrofonu lub niezgodność ze standardem", Alert.AlertType.ERROR);
+            popOutWindow.messageBox("Error", "Brak mikrofonu lub niezgodność ze standardem", Alert.AlertType.ERROR);
             System.exit(0);
         }
     }
@@ -95,7 +89,7 @@ public class Controller {
             clip.start();
             Thread.sleep(clip.getMicrosecondLength() / 1000);
         } catch (Exception exc) {
-            popOutBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
+            popOutWindow.messageBox("Error", "Nie wprowadzono lub nie zatwiedzono nazwy pliku", Alert.AlertType.ERROR);
         }
     }
 }
